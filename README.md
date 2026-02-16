@@ -1,2 +1,2 @@
 # tequila-jalisco
-Sitio web de mi municipio
+Sitio web de TEQUILA JALISCO
