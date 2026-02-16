@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tequila, Jalisco - Pueblo Mágico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        nav {
+            background: #654321;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav li {
+            margin: 0.5rem 1rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: #8B4513;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #8B4513;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #D2691E;
+        }
+
+        h3 {
+            color: #654321;
+            font-size: 1.8rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #D2691E;
+        }
+
+        .stat-card h3 {
+            color: #8B4513;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .stat-card p {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .food-item {
+            background: #fafafa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #D2691E;
+            transition: transform 0.3s;
+        }
+
+        .food-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .food-item h4 {
+            color: #8B4513;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .presidents-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            overflow-x: auto;
+            display: block;
+        }
+
+        .presidents-table table {
+            width: 100%;
+            min-width: 600px;
+        }
+
+        .presidents-table th {
+            background: #8B4513;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .presidents-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .presidents-table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .party-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .pan { background: #0066CC; }
+        .pri { background: #DC143C; }
+        .prd { background: #FFD700; color: #333; }
+        .mc { background: #FF6600; }
+        .morena { background: #8B0000; }
+
+        .alert-box {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .alert-box h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+
+        .alert-box p {
+            color: #856404;
+        }
+
+        .hotels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .hotel-card {
+            background: #fafafa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .hotel-card h4 {
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+        }
+
+        .hotel-rating {
+            color: #FFD700;
+            font-size: 1.2rem;
+        }
+
+        .chat-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chat-box {
+            height: 400px;
+            border: 2px solid #D2691E;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            background: #fafafa;
+        }
+
+        .message {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .user-message {
+            background: #E3F2FD;
+            margin-left: 20%;
+            text-align: right;
+        }
+
+        .bot-message {
+            background: #FFF3E0;
+            margin-right: 20%;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input-container input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #D2691E;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .chat-input-container button {
+            background: #8B4513;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .chat-input-container button:hover {
+            background: #654321;
+        }
+
+        .chat-input-container button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        footer {
+            background: #654321;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #8B4513;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .message {
+                margin: 0.5rem 0;
+            }
+
+            .user-message {
+                margin-left: 0;
+            }
+
+            .bot-message {
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🌵 Tequila, Jalisco 🥃</h1>
+        <p>Pueblo Mágico - Cuna de la Bebida Nacional de México</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#gastronomia">Gastronomía</a></li>
+            <li><a href="#turismo">Turismo</a></li>
+            <li><a href="#presidentes">Presidentes</a></li>
+            <li><a href="#diego-rivera">Caso Diego Rivera</a></li>
+            <li><a href="#hospedaje">Hospedaje</a></li>
+            <li><a href="#chatbot">Asistente IA</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="inicio">
+            <h2>📍 Bienvenido a Tequila</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>~45,000</h3>
+                    <p>Habitantes</p>
+                </div>
+                <div class="stat-card">
+                    <h3>2003</h3>
+                    <p>Año de Pueblo Mágico</p>
+                </div>
+                <div class="stat-card">
+                    <h3>1.4M</h3>
+                    <p>Visitantes Anuales</p>
+                </div>
+                <div class="stat-card">
+                    <h3>$575M</h3>
+                    <p>Exportaciones USD (2024)</p>
+                </div>
+            </div>
+
+            <p style="font-size: 1.1rem; line-height: 1.8;">
+                Tequila es un municipio de Jalisco, México, reconocido mundialmente por ser el lugar de origen de la bebida alcohólica que lleva su nombre. Ubicado a 60 km de Guadalajara, este Pueblo Mágico se encuentra a las faldas del volcán de Tequila, rodeado de los impresionantes paisajes de agave azul que conforman el Paisaje Agavero, declarado Patrimonio de la Humanidad por la UNESCO.
+            </p>
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 1rem;">
+                El nombre "Tequila" proviene del náhuatl <strong>"Tecuilan"</strong>, que significa "lugar de tributos" o "lugar donde se corta". Fundado el 15 de abril de 1530, el pueblo ha sido testigo de más de 490 años de historia, tradiciones y la evolución de la industria tequilera que hoy representa uno de los pilares económicos de la región.
+            </p>
+        </section>
+
+        <section id="gastronomia">
+            <h2>🍽️ Gastronomía y el Tequila</h2>
+            
+            <h3>🥃 El Tequila - Bebida Nacional</h3>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                El tequila es una bebida destilada del agave azul (Agave tequilana Weber) que se produce exclusivamente en ciertas regiones de México, principalmente en Jalisco. La industria tequilera de este municipio cuenta con más de 20 destilerías, entre las que destacan históricas casas como José Cuervo (La Rojeña, la destilería más antigua de América Latina con más de 260 años), Sauza, Herradura y muchas otras. El tequila puede ser blanco, reposado, añejo o extra añejo, cada uno con características únicas que deleitan paladares en todo el mundo.
+            </p>
+
+            <h3>🌮 Platillos Típicos</h3>
+            <div class="food-grid">
+                <div class="food-item">
+                    <h4>🥘 Birria</h4>
+                    <p>Consomé de carne de chivo o res, cocinada en hornos bajo tierra con leña y piedras volcánicas. Se cubre con pencas de agave azul hasta su cocción perfecta.</p>
+                </div>
+                <div class="food-item">
+                    <h4>🌯 Tortas Ahogadas</h4>
+                    <p>Birote (pan típico de la región) relleno de carnitas de cerdo, bañado en salsa de jitomate y chile de árbol. Un clásico jalisciense.</p>
+                </div>
+                <div class="food-item">
+                    <h4>🍖 Carne en su Jugo</h4>
+                    <p>Consomé de carne de res en trocitos y tocino acompañado con frijoles de la olla, sazonado con cebolla picada y cilantro.</p>
+                </div>
+                <div class="food-item">
+                    <h4>🍲 Pozole</h4>
+                    <p>Caldo de maíz cacahuazintle sazonado con salsa verde o roja, acompañado de carne de cerdo o pollo. Se sirve con lechuga, rábanos y tostadas.</p>
+                </div>
+                <div class="food-item">
+                    <h4>🍮 Jericalla</h4>
+                    <p>Postre tradicional similar al flan, preparado a base de leche, huevos, azúcar y canela, horneado hasta dorar la superficie.</p>
+                </div>
+                <div class="food-item">
+                    <h4>🍤 Camarones al Tequila</h4>
+                    <p>Especialidad local que fusiona los mariscos del Pacífico con la bebida emblemática de la región en una preparación única.</p>
+                </div>
+            </div>
+
+            <h3>🍹 Bebidas Tradicionales</h3>
+            <p style="font-size: 1.1rem;">
+                Además del tequila en sus diferentes presentaciones, en Tequila puedes degustar:
+            </p>
+            <ul style="font-size: 1.1rem; margin-left: 2rem; margin-top: 1rem;">
+                <li><strong>La Batanga:</strong> Bebida creada en el pueblo, con tequila, refresco de cola, jugo de limón y sal en vaso escarchado</li>
+                <li><strong>Tejuino:</strong> Bebida tradicional de maíz fermentado con limón y sal</li>
+                <li><strong>Margarita:</strong> Cóctel clásico con tequila, licor de naranja y jugo de limón</li>
+                <li><strong>Paloma:</strong> Tequila con refresco de toronja y limón</li>
+            </ul>
+        </section>
+
+        <section id="turismo">
+            <h2>🎒 Turismo en Tequila</h2>
+            
+            <h3>🚂 ¿Cómo Llegar y Moverse?</h3>
+            <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                Tequila recibe aproximadamente <strong>1.4 millones de visitantes anuales</strong> que llegan para conocer la Ruta del Tequila, un recorrido turístico que incluye varios municipios jaliscienses. Las principales formas de llegar son:
+            </p>
+            
+            <div class="food-grid">
+                <div class="food-item">
+                    <h4>🚂 Tequila Express</h4>
+                    <p>Tren turístico que parte desde Guadalajara. Revive el recorrido histórico que se realizaba para distribuir tequila por el país. Incluye degustaciones, mariachi y paisajes del agave.</p>
+                </div>
+                <div class="food-item">
+                    <h4>🚗 Auto Particular</h4>
+                    <p>A 60 km (1 hora) de Guadalajara por la carretera a Tepic-Nogales. Es la opción más flexible para explorar el pueblo y alrededores a tu ritmo.</p>
+                </div>
+                <div class="food-item">
+                    <h4>🚌 Autobús</h4>
+                    <p>Servicio regular desde Guadalajara y otras ciudades cercanas. Terminal ubicada cerca del centro histórico de Tequila.</p>
+                </div>
+                <div class="food-item">
+                    <h4>🎫 Tours Organizados</h4>
+                    <p>Empresas como Panoramex ofrecen tours completos que incluyen transporte, visitas a destilerías, comidas y actividades.</p>
+                </div>
+            </div>
+
+            <h3>🏛️ Principales Atractivos</h3>
+            <ul style="font-size: 1.1rem; margin-left: 2rem; margin-top: 1rem; line-height: 2;">
+                <li><strong>🏭 Destilería La Rojeña (José Cuervo):</strong> La destilería más antigua de América Latina (260+ años)</li>
+                <li><strong>🏛️ Museo Nacional del Tequila (MUNAT):</strong> Historia y técnicas de elaboración del tequila</li>
+                <li><strong>⛪ Parroquia de Santiago Apóstol:</strong> Templo del siglo XVIII con arquitectura colonial</li>
+                <li><strong>🌾 Campos de Agave:</strong> Paisajes del Paisaje Agavero, Patrimonio de la Humanidad UNESCO</li>
+                <li><strong>🏛️ Antiguos Lavaderos:</strong> Sitio histórico donde se lavaba la ropa en comunidad</li>
+                <li><strong>🏰 Haciendas Tequileras:</strong> Como La Quinta Sauza y El Centenario</li>
+                <li><strong>🌋 Volcán de Tequila:</strong> Con vistas panorámicas espectaculares</li>
+                <li><strong>💧 Cascada Los Azules:</strong> Oasis natural con aguas cristalinas</li>
+            </ul>
+
+            <h3>🎉 Tradiciones y Festividades</h3>
+            <ul style="font-size: 1.1rem; margin-left: 2rem; margin-top: 1rem; line-height: 2;">
+                <li><strong>La Bendición (Diaria, 9:00 PM):</strong> El sacerdote bendice al pueblo con tres campanadas. Los habitantes se detienen y voltean hacia la iglesia.</li>
+                <li><strong>Feria Nacional del Tequila (Nov-Dic):</strong> Coincide con fiestas patronales, incluye degustaciones, música y cultura</li>
+                <li><strong>Día de la Santa Cruz (3 de Mayo):</strong> Peregrinaciones con danzas y fuegos artificiales</li>
+                <li><strong>Los Cantaritos (24 y 29 de Junio):</strong> Se arrojan figuras de barro en forma de cántaros</li>
+            </ul>
+        </section>
+
+        <section id="presidentes">
+            <h2>🏛️ Presidentes Municipales de Tequila</h2>
+            
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                Desde 1995, el municipio de Tequila fue gobernado principalmente por el <span class="party-badge pan">PAN</span> (Partido Acción Nacional), con dos alternancias del <span class="party-badge pri">PRI</span> (Partido Revolucionario Institucional). En 2024, por primera vez en la historia moderna del municipio, llegó al poder un candidato de <span class="party-badge morena">MORENA</span>.
+            </p>
+
+            <div class="presidents-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Periodo</th>
+                            <th>Presidente Municipal</th>
+                            <th>Partido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-2027</td>
+                            <td>Diego Rivera Navarro</td>
+                            <td><span class="party-badge morena">MORENA</span></td>
+                        </tr>
+                        <tr>
+                            <td>2021-2024</td>
+                            <td>Alfonso Magallanes Moreno</td>
+                            <td><span class="party-badge pan">PAN</span></td>
+                        </tr>
+                        <tr>
+                            <td>2018-2021</td>
+                            <td>Gustavo Navarro Macias Valadez</td>
+                            <td><span class="party-badge pan">PAN</span></td>
+                        </tr>
+                        <tr>
+                            <td>2015-2018</td>
+                            <td>Fernando Garza Martínez</td>
+                            <td><span class="party-badge pri">PRI</span></td>
+                        </tr>
+                        <tr>
+                            <td>2012-2015</td>
+                            <td>Gustavo Macías Zambrano</td>
+                            <td><span class="party-badge pan">PAN</span></td>
+                        </tr>
+                        <tr>
+                            <td>2009-2012</td>
+                            <td>Luis Alfonso Partida Berrelleza</td>
+                            <td><span class="party-badge pan">PAN</span></td>
+                        </tr>
+                        <tr>
+                            <td>2006-2009</td>
+                            <td>Juan Martín Elizondo Franco</td>
+                            <td><span class="party-badge pan">PAN</span></td>
+                        </tr>
+                        <tr>
+                            <td>2003-2006</td>
+                            <td>Salvador Rosales Salazar</td>
+                            <td><span class="party-badge pri">PRI</span></td>
+                        </tr>
+                        <tr>
+                            <td>2000-2003</td>
+                            <td>Gustavo Macías Zambrano</td>
+                            <td><span class="party-badge pan">PAN</span></td>
+                        </tr>
+                        <tr>
+                            <td>1997-2000</td>
+                            <td>Juan Beckmann Vidal</td>
+                            <td><span class="party-badge pan">PAN</span></td>
+                        </tr>
+                        <tr>
+                            <td>1995-1997</td>
+                            <td>Salvador Rosales Rodríguez</td>
+                            <td><span class="party-badge pan">PAN</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="diego-rivera">
+            <h2>⚠️ El Caso de Diego Rivera Navarro</h2>
+            
+            <div class="alert-box">
+                <h3>🚨 Detención en Febrero 2026</h3>
+                <p><strong>Diego Rivera Navarro</strong>, presidente municipal de Tequila, fue detenido el 5 de febrero de 2026 como parte de la <strong>Operación Enjambre</strong>, un operativo coordinado por autoridades federales para combatir la extorsión y corrupción municipal.</p>
+            </div>
+
+            <h3>📋 Perfil del Ex-Alcalde</h3>
+            <p style="font-size: 1.1rem; line-height: 1.8;">
+                Diego Rivera Navarro es un político afiliado a <span class="party-badge morena">MORENA</span> que asumió la presidencia municipal el 1 de octubre de 2024 bajo la coalición "Sigamos Haciendo Historia en Jalisco" (Morena-PT-PVEM). Fue el <strong>primer morenista</strong> en llegar a la presidencia municipal de Tequila, rompiendo una hegemonía del PAN que databa desde 1995.
+            </p>
+
+            <h3>⚖️ Acusaciones</h3>
+            <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                Las autoridades federales señalan a Rivera Navarro por los siguientes delitos:
+            </p>
+            <ul style="font-size: 1.1rem; margin-left: 2rem; line-height: 2;">
+                <li><strong>Extorsión a empresas tequileras y cerveceras:</strong> En diciembre de 2025, la tequilera José Cuervo presentó denuncia por cobros excesivos de 60 millones de pesos, cuando los impuestos reales eran de alrededor de 1 millón de pesos anuales.</li>
+                <li><strong>Red de corrupción municipal:</strong> Se le acusa de liderar un esquema donde funcionarios municipales extorsionaban a empresarios y comerciantes.</li>
+                <li><strong>Desvío de recursos públicos:</strong> Supuesto mal uso del erario municipal.</li>
+                <li><strong>Vínculos con el CJNG:</strong> Presuntos lazos con el Cártel Jalisco Nueva Generación. En mayo de 2025 fue citado a declarar tras presentar al grupo musical "Los Alegres del Barranco" en un evento donde se proyectaron imágenes de "El Mencho", líder del CJNG.</li>
+                <li><strong>Acoso y abuso de autoridad:</strong> Regidoras municipales presentaron denuncias en su contra.</li>
+            </ul>
+
+            <h3>👥 Otros Detenidos</h3>
+            <p style="font-size: 1.1rem;">
+                Junto con Rivera Navarro fueron arrestados tres funcionarios municipales más:
+            </p>
+            <ul style="font-size: 1.1rem; margin-left: 2rem; line-height: 2;">
+                <li>Director de Seguridad Pública</li>
+                <li>Director de Catastro y Predial</li>
+                <li>Director de Obras Públicas</li>
+            </ul>
+
+            <h3>🏛️ Contexto Político</h3>
+            <p style="font-size: 1.1rem; line-height: 1.8;">
+                En su mensaje al asumir el cargo, Rivera Navarro prometió que su gobierno se centraría en "tres grandes principios: no mentir, no robar y no traicionar", en referencia a los valores promovidos por el expresidente Andrés Manuel López Obrador. Sin embargo, a pocos meses de su gestión, enfrentó múltiples denuncias que culminaron con su detención.
+            </p>
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 1rem;">
+                La Operación Enjambre, que llevó a su detención, es parte de una estrategia nacional contra la extorsión ordenada por la presidenta Claudia Sheinbaum. Esta operación previamente había resultado en la detención de tres presidentes municipales del Estado de México por delitos similares.
+            </p>
+
+            <h3>📢 Declaraciones Oficiales</h3>
+            <p style="font-size: 1.1rem; line-height: 1.8;">
+                El gobernador de Jalisco, Pablo Lemus, declaró en diciembre de 2024 que había al menos 10 casos más de hoteles y tequileras que reportaron extorsión por parte del ayuntamiento de Tequila. El caso puso en evidencia la infiltración del crimen organizado en estructuras gubernamentales locales y generó preocupación sobre el impacto en la industria tequilera, pilar económico de la región.
+            </p>
+        </section>
+
+        <section id="hospedaje">
+            <h2>🏨 Dónde Hospedarse en Tequila</h2>
+            
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                Tequila ofrece una amplia variedad de opciones de hospedaje, desde hoteles boutique de lujo hasta opciones económicas para todos los presupuestos. Muchos están ubicados en casonas históricas del siglo XVIII y XIX que te transportan a la época de las grandes haciendas tequileras.
+            </p>
+
+            <h3>⭐ Hoteles Destacados</h3>
+            <div class="hotels-grid">
+                <div class="hotel-card">
+                    <h4>🏰 Hotel Solar de las Ánimas</h4>
+                    <div class="hotel-rating">★★★★★</div>
+                    <p><strong>Categoría:</strong> Relais & Chateaux - Lujo</p>
+                    <p>Ubicado en el centro histórico con arquitectura del siglo XVII-XVIII. 93 habitaciones con tecnología moderna. Restaurante La Antigua Casona con alta cocina mexicana.</p>
+                </div>
+                <div class="hotel-card">
+                    <h4>🏡 Hotel Villa Tequila</h4>
+                    <div class="hotel-rating">★★★★</div>
+                    <p><strong>Categoría:</strong> Boutique</p>
+                    <p>A pocas cuadras de la plaza principal. Ambiente familiar en casona del siglo XIX. Excelente restaurante y fácil acceso a destilerías.</p>
+                </div>
+                <div class="hotel-card">
+                    <h4>🥃 Matices Hotel de Barricas</h4>
+                    <div class="hotel-rating">★★★★</div>
+                    <p><strong>Categoría:</strong> Temático</p>
+                    <p>Experiencia única: habitaciones con forma de barricas de tequila. Ubicado dentro de los terrenos de destilería La Guarreña.</p>
+                </div>
+                <div class="hotel-card">
+                    <h4>🌟 Casa Salles Hotel Boutique</h4>
+                    <div class="hotel-rating">★★★★</div>
+                    <p><strong>Categoría:</strong> Boutique</p>
+                    <p>Cocina regional mexicana con toques internacionales. Bar con amplia selección de tequilas "El Tequileño".</p>
+                </div>
+                <div class="hotel-card">
+                    <h4>🏛️ Hotel La Rienda Misión Tequillan</h4>
+                    <div class="hotel-rating">★★★</div>
+                    <p><strong>Categoría:</strong> Tradicional</p>
+                    <p>A 3 minutos de la catedral de Santiago Apóstol. Destilería propia "La Rienda". Alberca al aire libre.</p>
+                </div>
+                <div class="hotel-card">
+                    <h4>💰 Mercado "Cleofas Mota" (Económico)</h4>
+                    <div class="hotel-rating">★★</div>
+                    <p><strong>Categoría:</strong> Presupuesto</p>
+                    <p>Cerca de la terminal de camiones y plaza central. Opciones económicas con excelente ubicación para explorar el pueblo.</p>
+                </div>
+            </div>
+
+            <h3>💡 Consejos para Elegir Hospedaje</h3>
+            <ul style="font-size: 1.1rem; margin-left: 2rem; line-height: 2; margin-top: 1rem;">
+                <li><strong>Ubicación céntrica:</strong> Facilita caminar a atracciones principales como la plaza, museo y destilerías</li>
+                <li><strong>Tours incluidos:</strong> Algunos hoteles ofrecen paquetes con visitas a destilerías y degustaciones</li>
+                <li><strong>Temporada alta:</strong> Reserva con anticipación durante la Feria Nacional del Tequila (nov-dic)</li>
+                <li><strong>Estacionamiento:</strong> Si viajas en auto, verifica que el hotel cuente con este servicio</li>
+                <li><strong>Experiencia auténtica:</strong> Los hoteles en casonas históricas ofrecen ambiente tradicional único</li>
+            </ul>
+        </section>
+
+        <section id="chatbot">
+            <h2>🤖 Asistente Virtual sobre Tequila</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                ¿Tienes preguntas sobre Tequila, Jalisco? Nuestro asistente virtual con IA puede ayudarte con información sobre turismo, gastronomía, hospedaje, historia y más.
+            </p>
+
+            <div class="chat-container">
+                <div class="chat-box" id="chatBox">
+                    <div class="message bot-message">
+                        <strong>🤖 Asistente:</strong> ¡Hola! Soy tu guía virtual de Tequila, Jalisco. Puedo ayudarte con información sobre:
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li>Atracciones turísticas y cómo llegar</li>
+                            <li>Gastronomía y platillos típicos</li>
+                            <li>Hoteles y hospedaje</li>
+                            <li>Historia del tequila y destilerías</li>
+                            <li>Festividades y tradiciones</li>
+                        </ul>
+                        ¿En qué puedo ayudarte hoy?
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input 
+                        type="text" 
+                        id="userInput" 
+                        placeholder="Escribe tu pregunta aquí..." 
+                        onkeypress="if(event.key === 'Enter') sendMessage()"
+                    >
+                    <button onclick="sendMessage()" id="sendBtn">Enviar</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Tequila, Jalisco - Pueblo Mágico</p>
+        <p>Información turística y cultural del municipio más emblemático de Jalisco</p>
+    </footer>
+
+    <script>
+        const chatBox = document.getElementById('chatBox');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        // Base de conocimiento del chatbot
+        const conocimiento = {
+            población: "Tequila tiene aproximadamente 45,000 habitantes en todo el municipio, con alrededor de 31,115 personas en la cabecera municipal.",
+            habitantes: "Tequila tiene aproximadamente 45,000 habitantes en todo el municipio.",
+            hospedaje: "Los mejores hoteles en Tequila incluyen: Hotel Solar de las Ánimas (5 estrellas, Relais & Chateaux), Hotel Villa Tequila (4 estrellas boutique), Matices Hotel de Barricas (experiencia única en barricas), Casa Salles Hotel Boutique, y Hotel La Rienda Misión Tequillan. Hay opciones desde económicas ($500 MXN) hasta lujo ($3,000+ MXN).",
+            hoteles: "Los mejores hoteles son: Solar de las Ánimas (lujo), Villa Tequila (boutique), Matices Hotel de Barricas (temático), Casa Salles y La Rienda Misión Tequillan. Precios desde $500 hasta $3,000+ MXN por noche.",
+            llegar: "Puedes llegar a Tequila en: 1) Tequila Express (tren desde Guadalajara), 2) Auto (60 km desde GDL, 1 hora), 3) Autobús desde Guadalajara, o 4) Tours organizados que incluyen transporte.",
+            turismo: "Los principales atractivos son: Destilería La Rojeña (José Cuervo, 260 años), Museo Nacional del Tequila, Parroquia de Santiago Apóstol, campos de agave (Patrimonio UNESCO), Volcán de Tequila, Cascada Los Azules, y haciendas tequileras. Recibe 1.4 millones de visitantes al año.",
+            comida: "Los platillos típicos incluyen: Birria (chivo o res), Tortas Ahogadas, Carne en su Jugo, Pozole, Jericalla (postre), y Camarones al Tequila. Para bebidas: La Batanga, Tejuino, Margarita y Paloma.",
+            gastronomía: "La gastronomía de Tequila combina platillos jaliscienses con toques locales. Destacan: Birria, Tortas Ahogadas, Carne en su Jugo, Pozole y Jericalla. El Mercado 'Cleofas Mota' es el mejor lugar para comida típica económica.",
+            tequila: "El tequila es una bebida destilada del agave azul que se produce exclusivamente en ciertas regiones de México. Tequila tiene más de 20 destilerías, incluyendo La Rojeña (José Cuervo, la más antigua de América con 260+ años), Sauza y Herradura. Puede ser blanco, reposado, añejo o extra añejo.",
+            destilerías: "Las principales destilerías son: La Rojeña (José Cuervo, 260 años, la más antigua), Sauza (La Quinta Sauza), Herradura, La Guarreña, y más de 20 otras. La mayoría ofrecen tours con degustaciones.",
+            presidentes: "Desde 1995 Tequila fue gobernado principalmente por el PAN, con dos alternancias del PRI. Diego Rivera (MORENA) fue el primer morenista en 2024-2027. Otros presidentes recientes: Alfonso Magallanes (PAN, 2021-2024), Gustavo Navarro (PAN, 2018-2021), Fernando Garza (PRI, 2015-2018).",
+            "diego rivera": "Diego Rivera Navarro (MORENA) fue presidente municipal 2024-2027. Fue detenido el 5 de febrero de 2026 en la Operación Enjambre por extorsión a tequileras (José Cuervo denunció cobro de 60M pesos vs 1M real), corrupción municipal, desvío de recursos y presuntos vínculos con el CJNG. Fue el primer morenista en gobernar Tequila.",
+            rivera: "Diego Rivera Navarro fue detenido en febrero 2026 por extorsión, corrupción y vínculos con el CJNG. Era el primer presidente de MORENA en Tequila. Extorsionó a tequileras como José Cuervo pidiendo 60 millones de pesos.",
+            tradiciones: "Tradiciones importantes: La Bendición (diaria 9 PM, el sacerdote bendice al pueblo), Feria Nacional del Tequila (nov-dic), Día de la Santa Cruz (3 mayo), Los Cantaritos (24 y 29 junio). El pueblo también celebra fiestas patronales.",
+            "pueblo mágico": "Tequila fue nombrado Pueblo Mágico en 2003 por su importancia cultural, historia de más de 490 años, y ser el origen de la bebida nacional de México. El Paisaje Agavero es Patrimonio de la Humanidad UNESCO.",
+            historia: "Tequila fue fundado el 15 de abril de 1530 por Fray Juan Calero y Cristóbal de Oñate. El nombre viene del náhuatl 'Tecuilan' (lugar de tributos). Los habitantes originales eran chichimecas, otomíes, toltecas y nahuatlacas. Se volvió Villa en 1824.",
+            festival: "La Feria Nacional del Tequila se celebra en noviembre-diciembre y coincide con las fiestas patronales. Incluye degustaciones, charreadas, música de mariachi, danzas folclóricas, eventos culturales y gastronómicos.",
+            exportaciones: "En 2024, Tequila acumuló exportaciones por $575 millones USD, principalmente en tequila. Los principales destinos son Estados Unidos, Australia y Canadá. La industria genera miles de empleos en la región."
+        };
+
+        async function sendMessage() {
+            const mensaje = userInput.value.trim();
+            if (!mensaje) return;
+
+            // Deshabilitar input mientras se procesa
+            sendBtn.disabled = true;
+            userInput.disabled = true;
+
+            // Mostrar mensaje del usuario
+            const userDiv = document.createElement('div');
+            userDiv.className = 'message user-message';
+            userDiv.innerHTML = `<strong>👤 Tú:</strong> ${mensaje}`;
+            chatBox.appendChild(userDiv);
+            userInput.value = '';
+
+            // Scroll al final
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Mostrar indicador de carga
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'message bot-message';
+            loadingDiv.innerHTML = '<strong>🤖 Asistente:</strong> <span class="loading"></span> Pensando...';
+            chatBox.appendChild(loadingDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Buscar respuesta en conocimiento local primero
+            const mensajeLower = mensaje.toLowerCase();
+            let respuestaLocal = null;
+
+            for (const [key, value] of Object.entries(conocimiento)) {
+                if (mensajeLower.includes(key)) {
+                    respuestaLocal = value;
+                    break;
+                }
+            }
+
+            // Si hay respuesta local, usarla (más rápido)
+            if (respuestaLocal) {
+                setTimeout(() => {
+                    loadingDiv.remove();
+                    const botDiv = document.createElement('div');
+                    botDiv.className = 'message bot-message';
+                    botDiv.innerHTML = `<strong>🤖 Asistente:</strong> ${respuestaLocal}`;
+                    chatBox.appendChild(botDiv);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                    
+                    sendBtn.disabled = false;
+                    userInput.disabled = false;
+                    userInput.focus();
+                }, 500);
+                return;
+            }
+
+            // Si no hay respuesta local, usar la API de Claude
+            try {
+                const response = await fetch('https://api.anthropic.com/v1/messages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        model: 'claude-sonnet-4-20250514',
+                        max_tokens: 1000,
+                        system: `Eres un guía turístico experto en Tequila, Jalisco, México. Proporciona información precisa, amigable y útil sobre:
+
+- Turismo: atracciones (La Rojeña/José Cuervo, MUNAT, Parroquia Santiago Apóstol, campos de agave UNESCO, volcán, cascadas)
+- Gastronomía: birria, tortas ahogadas, carne en su jugo, pozole, jericalla, camarones al tequila, bebidas como La Batanga
+- Hospedaje: hoteles como Solar de las Ánimas, Villa Tequila, Matices Hotel de Barricas
+- Historia: fundado 1530, nombre náhuatl "Tecuilan", Pueblo Mágico 2003, 490+ años de historia
+- Datos: ~45,000 habitantes, 1.4M visitantes/año, $575M exportaciones 2024
+- Tequila: bebida destilada del agave azul, más de 20 destilerías, tipos (blanco, reposado, añejo)
+- Cómo llegar: Tequila Express, auto desde Guadalajara (60km), autobús, tours
+- Tradiciones: La Bendición (9 PM diaria), Feria Nacional (nov-dic), Santa Cruz (3 mayo)
+- Presidentes: principalmente PAN 1995-2024, Diego Rivera primer morenista 2024
+- Caso Diego Rivera: detenido feb 2026 por extorsión (José Cuervo, 60M pesos), corrupción, vínculos CJNG
+
+Responde en español, de forma concisa (2-3 párrafos máximo), amigable y práctica. Si no sabes algo específico, di que consulten información oficial actualizada.`,
+                        messages: [
+                            { role: 'user', content: mensaje }
+                        ]
+                    })
+                });
+
+                const data = await response.json();
+                loadingDiv.remove();
+
+                if (data.content && data.content[0] && data.content[0].text) {
+                    const respuesta = data.content[0].text;
+                    const botDiv = document.createElement('div');
+                    botDiv.className = 'message bot-message';
+                    botDiv.innerHTML = `<strong>🤖 Asistente:</strong> ${respuesta}`;
+                    chatBox.appendChild(botDiv);
+                } else {
+                    throw new Error('Respuesta inválida de la API');
+                }
+            } catch (error) {
+                loadingDiv.remove();
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'message bot-message';
+                errorDiv.innerHTML = `<strong>🤖 Asistente:</strong> Lo siento, no pude procesar tu pregunta en este momento. Por favor, intenta reformular tu pregunta o pregunta sobre temas específicos como: turismo, gastronomía, hoteles, tequila, historia, o el caso de Diego Rivera.`;
+                chatBox.appendChild(errorDiv);
+            }
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+            sendBtn.disabled = false;
+            userInput.disabled = false;
+            userInput.focus();
+        }
+
+        // Navegación suave
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
